@@ -1,5 +1,9 @@
 // this function converts bitmap in to byte array. 
 //input format ARGB8888 output 8 bit bytearray for STM32
+
+import java.io.ByteArrayOutputStream;
+import java.util.Base64;
+
 public static String convertImageToFormattedString(Bitmap bitmap) {
     int width = bitmap.getWidth();
     int height = bitmap.getHeight();
@@ -22,3 +26,11 @@ public static String convertImageToFormattedString(Bitmap bitmap) {
         builder.append("\n");
     }
 }
+
+// Method to convert Bitmap to Base64
+    public static String convertBitmapToBase64(Bitmap bitmap) {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+        byte[] byteArray = byteArrayOutputStream.toByteArray();
+        return Base64.encodeToString(byteArray, Base64.DEFAULT);
+    }
